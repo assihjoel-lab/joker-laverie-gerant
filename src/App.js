@@ -2400,8 +2400,11 @@ export default function App(){
   const [gerantPin,  savePin,       pinReady]    = useFireDoc("config","pin",       "1234");
   const [adminPw,    saveAdminPw,   pwReady]     = useFireDoc("config","adminPw",   "admin123");
   const [paiementConfig, savePaiementConfig, pmtReady] = useFireDoc("config","paiements", {flooz:JOKER_FLOOZ_DEFAULT,tmoney:JOKER_TMONEY_DEFAULT});
+  const [statutLaverie,  saveStatutLaverie,  statReady] = useFireDoc("config","statut",    {ouvert:true,message:""});
+  const [objectifJour,   saveObjectifJour,   objReady]  = useFireDoc("config","objectif",  {montant:50000});
+  const [depenses,       upsertDepense,      removeDepense, depReady] = useFireCollection("depenses", []);
 
-  const allReady = cmdReady&&fripReady&&livReady&&cliReady&&tarReady&&rewReady&&pinReady&&pwReady&&pmtReady&&promoReady;
+  const allReady = cmdReady&&fripReady&&livReady&&cliReady&&tarReady&&rewReady&&pinReady&&pwReady&&pmtReady&&promoReady&&statReady&&objReady&&depReady;
 
   function setCommandes(fn){
     const prev = commandes;
@@ -2461,6 +2464,9 @@ export default function App(){
         livreurs={livreurs} setLivreurs={setLivreurs}
         promos={promos} setPromos={setPromos}
         paiementConfig={paiementConfig} savePaiementConfig={savePaiementConfig}
+        statutLaverie={statutLaverie} saveStatutLaverie={saveStatutLaverie}
+        depenses={depenses} upsertDepense={upsertDepense} removeDepense={removeDepense}
+        objectifJour={objectifJour} saveObjectifJour={saveObjectifJour}
         gerantPin={gerantPin} setGerantPin={setGerantPin}
         adminPw={adminPw} setAdminPw={setAdminPw}
         onLogout={handleLogout}
